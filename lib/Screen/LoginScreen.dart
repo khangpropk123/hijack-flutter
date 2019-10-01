@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:hijack_flutter/Screen/ForgotPWScreen.dart';
+import 'package:hijack_flutter/Screen/Home/MainScreen.dart';
 import 'package:hijack_flutter/Screen/TermsScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -159,7 +160,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () { 
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (contex)=>MainScreen()));
+                              },
                             ),
                           ),
                         ),
