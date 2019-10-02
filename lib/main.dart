@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hijack_flutter/Screen/ForgotPWScreen.dart';
+import 'package:hijack_flutter/Screen/Login/ForgotPWScreen.dart';
 import 'package:hijack_flutter/Screen/Home/HomeScreen.dart';
 import 'package:hijack_flutter/Screen/Home/MainScreen.dart';
-import 'package:hijack_flutter/Screen/LoginScreen.dart';
-import 'package:hijack_flutter/Screen/TermsScreen.dart';
+import 'package:hijack_flutter/Screen/Login/LoginScreen.dart';
+import 'package:hijack_flutter/Screen/Login/TermsScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,11 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Hijack',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Hijack Food Delivery'),
     );
   }
 }

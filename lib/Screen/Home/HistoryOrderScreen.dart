@@ -1,34 +1,19 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'Utilities.dart';
 
-class TodayOrderScreen extends StatefulWidget {
+class HistoryOrderScreen extends StatefulWidget {
   @override
-  _TodayOrderScreenState createState() => _TodayOrderScreenState();
+  _HistoryOrderScreen createState() => _HistoryOrderScreen();
 }
 
-class _TodayOrderScreenState extends State<TodayOrderScreen> {
-  
+class _HistoryOrderScreen extends State<HistoryOrderScreen> {
   Color textColor = Color.fromRGBO(74, 74, 74, 1);
-  Color iconColor = Color.fromRGBO(160, 160, 160, 1);
-  List<Orders> orders;
-  Color deliveringColor = Color.fromRGBO(65, 117, 5, 1);
-  Color deliveredColor = Color.fromRGBO(80, 227, 194, 1);
-  Color readyColor = Color.fromRGBO(74, 144, 226, 1);
-  Color cancelledColor = Color.fromRGBO(168, 0, 20, 1);
-  Color confirmedColor = Color.fromRGBO(245, 166, 35, 1);
-  Orders order1, order2, order3, order4, order5;
-  @override
-  void initState() {
-    super.initState();
-    orders=[Orders(deliveringColor, "• Delivering"),Orders(deliveredColor, "• Delivered"),Orders(confirmedColor, "• Confirmed"),Orders(readyColor, "• Food Ready"),Orders(cancelledColor, "• Cancelled"),];
-  }
-
+  Color iconColor = Color.fromRGBO(160,160,160,1);
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: 20,
       itemBuilder: (BuildContext contex, index) {
         return Padding(
           padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
@@ -72,9 +57,8 @@ class _TodayOrderScreenState extends State<TodayOrderScreen> {
                                       fontWeight: FontWeight.bold),
                                 )),
                                 Text(
-                                  orders[index].statusText,
+                                  '• Delivering',
                                   style: TextStyle(
-                                      color: orders[index].statusColor ,
                                       fontSize: 10,
                                       fontFamily: 'OpenSans',
                                       fontWeight: FontWeight.bold),
@@ -167,13 +151,12 @@ class _TodayOrderScreenState extends State<TodayOrderScreen> {
                                 children: <Widget>[
                                   Container(
                                     alignment: Alignment.center,
-                                    height: 20,
-                                    width: 5,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                'assets/img/line2@3x.png'))),
-                                  ),
+                                height: 20,
+                                width: 5,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(image: AssetImage('assets/img/line2@3x.png'))
+                                ),
+                              ),
                                 ],
                               ),
                             ),
@@ -219,53 +202,43 @@ class _TodayOrderScreenState extends State<TodayOrderScreen> {
                 ),
                 Expanded(
                   flex: 2,
-                  child: Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
                     child: Container(
-                      decoration: BoxDecoration(
-                        border: Border(bottom: BorderSide(width: 1, color: iconColor))
-                      ),
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 34,
-                            width: 335,
-                            child: RaisedButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        "TOTAL: 5 dishes",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: 'OpenSans',
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
+                      height: 34,
+                      width: 335,
+                      child: RaisedButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "TOTAL: 5 dishes",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  Expanded(
-                                    child: Container(
-                                      alignment: Alignment.centerRight,
-                                      child: Text(
-                                        "S" + '\$' + "1220.00",
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: 'OpenSans',
-                                            fontWeight: FontWeight.bold,
-                                            color: Color.fromRGBO(208, 3, 27, 1)),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
-                          ),
-
-                        ],
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  "S" + '\$' + "1220.00",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: 'OpenSans',
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(208, 3, 27, 1)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -277,10 +250,4 @@ class _TodayOrderScreenState extends State<TodayOrderScreen> {
       },
     );
   }
-}
-
-Color RandColor() {
-  Random rand = Random();
-  return Color.fromRGBO(
-      rand.nextInt(255), rand.nextInt(255), rand.nextInt(255), 1);
 }

@@ -1,9 +1,9 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:hijack_flutter/Screen/ForgotPWScreen.dart';
+import 'package:hijack_flutter/Screen/Login/ForgotPWScreen.dart';
 import 'package:hijack_flutter/Screen/Home/MainScreen.dart';
-import 'package:hijack_flutter/Screen/TermsScreen.dart';
+import 'package:hijack_flutter/Screen/Login/TermsScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

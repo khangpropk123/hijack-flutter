@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Expanded(
           flex: 12,
           child: Container(
-            color: activeColor,
+            color: Color.fromRGBO(168, 0, 20, 1),
             height: 88,
             width: MediaQuery.of(context).size.width,
             child: Padding(

@@ -1,6 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hijack_flutter/Screen/Home/HistoryOrderScreen.dart';
 import 'package:hijack_flutter/Screen/Home/HomeScreen.dart';
+import 'package:hijack_flutter/Screen/Home/NotificationScreen.dart';
+import 'package:hijack_flutter/Screen/Home/ProfileScreen.dart';
 import 'package:hijack_flutter/Screen/Home/TodayOrder.dart';
 
 class MainScreen extends StatefulWidget {
@@ -19,15 +22,9 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> widgetMain = <Widget>[
     HomeScreen(),
     TodayOrderScreen(),
-    Center(
-      child: Text('Notification Screen!'),
-    ),
-     Center(
-      child: Text('Profile Screen!'),
-    ),
-    Center(
-      child: Text('History Delivery Screen!'),
-    ),
+    NotificationScreen(),
+    ProfileScreen(),
+    HistoryOrderScreen(),
     
   ];
   @override
@@ -35,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
         appBar: narbarSelected == 1
             ? AppBar(
-                backgroundColor: activeColor,
+                backgroundColor: Color.fromRGBO(168, 0, 20, 1),
                 title: Container(
                   height: 50,
                   width: MediaQuery.of(context).size.width,
