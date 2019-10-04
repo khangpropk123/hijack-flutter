@@ -2,6 +2,9 @@ import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hijack_flutter/Screen/Home/AccountInfoScreen.dart';
+import 'package:hijack_flutter/Screen/Home/ChangePassScreen.dart';
+import 'package:hijack_flutter/Screen/Home/Utilities.dart';
 import 'package:hijack_flutter/Screen/Home/NotificationScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -54,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: ListView(
             padding: EdgeInsets.all(0.0),
             children: <Widget>[
-            //Header Sub
+              //Header Sub
               Container(
                 color: grayColor,
                 height: eleHeight,
@@ -67,7 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontWeight: FontWeight.bold)),
                 ),
               ),
-            //Payout
+              //Payout
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -113,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-            //Invoice
+              //Invoice
               Container(
                 alignment: Alignment.centerLeft,
                 color: Colors.white,
@@ -155,7 +158,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-            //Header Sub
+              //Header Sub
               Container(
                 color: grayColor,
                 height: eleHeight,
@@ -168,53 +171,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontWeight: FontWeight.bold)),
                 ),
               ),
-            //Accounts Information
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border:
-                      Border(bottom: BorderSide(width: 1, color: grayColor)),
-                ),
-                alignment: Alignment.centerLeft,
-                height: eleHeight,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 37),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          ImageIcon(
-                            AssetImage('assets/img/notificationCopy3@3x.png'),
-                            color: mainTextColor,
+              //Accounts Information
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  setState(() {
+                    mainScreenControler.sink.add(5);
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border:
+                        Border(bottom: BorderSide(width: 1, color: grayColor)),
+                  ),
+                  alignment: Alignment.centerLeft,
+                  height: eleHeight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 37),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            ImageIcon(
+                              AssetImage('assets/img/notificationCopy3@3x.png'),
+                              color: mainTextColor,
+                              size: 14,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 24.0),
+                              child: Text(
+                                "Account Information",
+                                style: TextStyle(
+                                    color: mainTextColor,
+                                    fontSize: 14,
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30),
+                          child: Icon(
+                            Icons.arrow_forward_ios,
                             size: 14,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 24.0),
-                            child: Text(
-                              "Account Information",
-                              style: TextStyle(
-                                  color: mainTextColor,
-                                  fontSize: 14,
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 30),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 14,
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            //Notification
+              //Notification
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -260,56 +271,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-            //Password
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                alignment: Alignment.centerLeft,
-                height: eleHeight,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 37),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          ImageIcon(
-                            AssetImage('assets/img/notificationCopy3@3x.png'),
-                            color: mainTextColor,
+              //Password
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChangePassScreen()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  alignment: Alignment.centerLeft,
+                  height: eleHeight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 37),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            ImageIcon(
+                              AssetImage('assets/img/notificationCopy3@3x.png'),
+                              color: mainTextColor,
+                              size: 14,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 24.0),
+                              child: Text(
+                                "Password",
+                                style: TextStyle(
+                                    color: mainTextColor,
+                                    fontSize: 14,
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30),
+                          child: Icon(
+                            Icons.arrow_forward_ios,
                             size: 14,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 24.0),
-                            child: Text(
-                              "Password",
-                              style: TextStyle(
-                                  color: mainTextColor,
-                                  fontSize: 14,
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 30),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 14,
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            //Header Sub
+              //Header Sub
               Container(
                 color: grayColor,
                 height: eleHeight,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 37, top:18),
+                  padding: const EdgeInsets.only(left: 37, top: 18),
                   child: Text("Support",
                       style: TextStyle(
                           color: grayText,
@@ -317,7 +337,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontWeight: FontWeight.bold)),
                 ),
               ),
-            //FAQ
+              //FAQ
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -363,7 +383,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-            //Term and ...
+              //Term and ...
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -409,7 +429,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-            //Privacy
+              //Privacy
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -453,54 +473,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-            //Logout
-              Padding(
-                padding: const EdgeInsets.only(top: 40),
+              //Logout
+              Container(
+                height: MediaQuery.of(context).size.height -
+                    (171 + 83) -
+                    eleHeight * 11,
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  alignment: Alignment.centerLeft,
                   height: eleHeight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 37),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
+                  child: Center(
+                    child: Container(
+                      height: eleHeight,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 37),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            ImageIcon(
-                              AssetImage('assets/img/iconLogout@3x.png'),
-                              color: hijackColor,
-                              size: 14,
+                            Row(
+                              children: <Widget>[
+                                ImageIcon(
+                                  AssetImage('assets/img/iconLogout@3x.png'),
+                                  color: hijackColor,
+                                  size: 14,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 24.0),
+                                  child: Text(
+                                    "Logout",
+                                    style: TextStyle(
+                                        color: hijackColor,
+                                        fontSize: 14,
+                                        fontFamily: 'OpenSans',
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 24.0),
-                              child: Text(
-                                "Logout",
-                                style: TextStyle(
-                                    color: hijackColor,
-                                    fontSize: 14,
-                                    fontFamily: 'OpenSans',
-                                    fontWeight: FontWeight.bold),
+                              padding: const EdgeInsets.only(right: 30),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color: hijackColor,
+                                size: 14,
                               ),
-                            ),
+                            )
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 30),
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            color: hijackColor,
-                            size: 14,
-                          ),
-                        )
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),  
+              ),
             ],
           ),
         )

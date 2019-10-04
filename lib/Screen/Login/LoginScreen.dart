@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           fit: BoxFit.fitWidth)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 80, 45, 55),
+                  padding: const EdgeInsets.only( left: 25, top: 80),
                   child: Container(
                     height: 45,
                     width: 311,
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 122, 59, 16),
+                  padding: const EdgeInsets.only(left:25,top: 122),
                   child: Container(
                     width: 270,
                     child: Text(
@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  padding: const EdgeInsets.only(left:25,right: 25),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 27.0),
                     child: Column(
@@ -83,15 +83,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         Container(
+                          alignment: Alignment.center,
                           height: 40,
-                          width: 325,
                           child: Padding(
                             padding: const EdgeInsets.only(
                               top: 6.0,
                             ),
                             child: TextField(
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                                ),
                               ),
                             ),
                           ),
@@ -109,7 +111,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Container(
                           height: 40,
-                          width: 325,
                           child: Padding(
                             padding: const EdgeInsets.only(
                               top: 6.0,
@@ -118,8 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               obscureText: true,
                               decoration: InputDecoration(
                                 fillColor: Color.fromARGB(255, 246, 246, 246),
-                                border: OutlineInputBorder(),
-                              ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                                ),
+                              )
                             ),
                           ),
                         ),

@@ -9,7 +9,7 @@ class HistoryOrderScreen extends StatefulWidget {
 
 class _HistoryOrderScreen extends State<HistoryOrderScreen> {
   Color textColor = Color.fromRGBO(74, 74, 74, 1);
-  Color iconColor = Color.fromRGBO(160,160,160,1);
+  Color iconColor = Color.fromRGBO(160, 160, 160, 1);
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -151,12 +151,13 @@ class _HistoryOrderScreen extends State<HistoryOrderScreen> {
                                 children: <Widget>[
                                   Container(
                                     alignment: Alignment.center,
-                                height: 20,
-                                width: 5,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(image: AssetImage('assets/img/line2@3x.png'))
-                                ),
-                              ),
+                                    height: 20,
+                                    width: 5,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                'assets/img/line2@3x.png'))),
+                                  ),
                                 ],
                               ),
                             ),
@@ -202,42 +203,44 @@ class _HistoryOrderScreen extends State<HistoryOrderScreen> {
                 ),
                 Expanded(
                   flex: 2,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
+                  child: Center(
                     child: Container(
-                      height: 34,
-                      width: 335,
-                      child: RaisedButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "TOTAL: 5 dishes",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'OpenSans',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  "S" + '\$' + "1220.00",
-                                  style: TextStyle(
+                      width: MediaQuery.of(context).size.width,
+                      child: Container(
+                        height: 34,
+                        width: 335,
+                        child: RaisedButton(
+                          onPressed: () {},
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "TOTAL: 5 dishes",
+                                    style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: 'OpenSans',
                                       fontWeight: FontWeight.bold,
-                                      color: Color.fromRGBO(208, 3, 27, 1)),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    "S" + '\$' + "1220.00",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: 'OpenSans',
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromRGBO(208, 3, 27, 1)),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

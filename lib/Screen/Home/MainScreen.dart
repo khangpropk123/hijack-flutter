@@ -1,10 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hijack_flutter/Screen/Home/AccountInfoScreen.dart';
 import 'package:hijack_flutter/Screen/Home/HistoryOrderScreen.dart';
 import 'package:hijack_flutter/Screen/Home/HomeScreen.dart';
 import 'package:hijack_flutter/Screen/Home/NotificationScreen.dart';
 import 'package:hijack_flutter/Screen/Home/ProfileScreen.dart';
 import 'package:hijack_flutter/Screen/Home/TodayOrder.dart';
+import 'package:hijack_flutter/Screen/Home/Utilities.dart';
+
+int widSelected = 0;
 
 class MainScreen extends StatefulWidget {
   @override
@@ -12,7 +18,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int widSelected = 0;
   int narbarSelected = 0;
   int appbarSelected = 0;
   Color grayColor = Color.fromRGBO(142, 142, 147, 1);
@@ -25,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
     NotificationScreen(),
     ProfileScreen(),
     HistoryOrderScreen(),
-    
+    AccountInfoScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -40,10 +45,11 @@ class _MainScreenState extends State<MainScreen> {
                     children: <Widget>[
                       Expanded(
                         child: GestureDetector(
+                          behavior: HitTestBehavior.translucent,
                           onTap: () {
                             setState(() {
                               appbarSelected = 0;
-                              widSelected=1;
+                              widSelected = 1;
                             });
                           },
                           child: Container(
@@ -107,6 +113,7 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       Expanded(
                         child: GestureDetector(
+                          behavior: HitTestBehavior.translucent,
                           onTap: () {
                             setState(() {
                               appbarSelected = 1;
@@ -159,14 +166,20 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               )
             : null,
-        body: widgetMain.elementAt(widSelected),
+        body: StreamBuilder(
+          initialData: 0,
+          stream: mainScreenControler.stream,
+          builder: (BuildContext contex, snapshot) {
+            return widgetMain.elementAt(snapshot.data);
+          },
+        ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: narbarSelected,
           onTap: (index) {
             setState(() {
               narbarSelected = index;
-              widSelected = narbarSelected;
-              appbarSelected=0;
+              mainScreenControler.sink.add(narbarSelected);
+              appbarSelected = 0;
             });
           },
           selectedLabelStyle: TextStyle(color: activeColor),

@@ -95,14 +95,15 @@ class _ForgotPWScreenState extends State<ForgotPWScreen> {
                         ),
                         Container(
                           height: 40,
-                          width: 325,
                           child: Padding(
                             padding: const EdgeInsets.only(
                               top: 6.0,
                             ),
                             child: TextField(
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                                ),
                               ),
                             ),
                           ),
