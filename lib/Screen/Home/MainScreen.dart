@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hijack_flutter/Screen/Home/AccountInfoScreen.dart';
+import 'package:hijack_flutter/Screen/ProfilesScreen/AccountInfoScreen.dart';
 import 'package:hijack_flutter/Screen/Home/HistoryOrderScreen.dart';
 import 'package:hijack_flutter/Screen/Home/HomeScreen.dart';
 import 'package:hijack_flutter/Screen/Home/NotificationScreen.dart';

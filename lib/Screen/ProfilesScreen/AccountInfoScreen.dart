@@ -1,7 +1,12 @@
+import 'dart:io';
+import 'dart:ui' as prefix0;
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hijack_flutter/Screen/Home/MainScreen.dart';
 import 'package:hijack_flutter/Screen/Home/Utilities.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AccountInfoScreen extends StatefulWidget {
   @override
@@ -12,6 +17,47 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
   final _phoneFormater = NumberTextInputFormatter();
   String txtNumberPhone = '';
   bool isPhone = true;
+  File avatar;
+  String avatarPath;
+  String path;
+  //Get Image
+  getPath() async {
+    path = await getStringFromPF('avatarPath');
+    print(path);
+    if (File(path).existsSync()) {
+      setState(() {
+        avatar = File(path);
+      });
+    } else {
+      setState(() {
+        avatar = null;
+      });
+    }
+  }
+
+  Future getImageFromCam() async {
+    File image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      avatar = image;
+      saveStringToSF('avatarPath', image.path.toString());
+    });
+  }
+
+  Future getImageFromGal() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      avatar = image;
+      avatarPath = image.path.toString();
+      saveStringToSF('avatarPath', image.path.toString());
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPath();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,22 +81,59 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                           child: CircleAvatar(
                             maxRadius: 50,
                             minRadius: 40,
-                            backgroundImage:
-                                AssetImage('assets/img/oval@3x.png'),
+                            backgroundImage: avatar == null
+                                ? AssetImage('assets/img/oval@3x.png')
+                                : FileImage(avatar),
                           ),
                         ),
                         Flexible(
-                          child: Container(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Text(
-                                'Change Profile Picture',
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    fontSize: 12,
-                                    color: hijackTextColor,
-                                    fontFamily: 'OpenSans',
-                                    fontWeight: FontWeight.bold),
-                              )),
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.translucent,
+                            onTap: () {
+                              showCupertinoModalPopup(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      CupertinoActionSheet(
+                                          title: Text('Change Profile Picture'),
+                                          actions: <Widget>[
+                                            CupertinoActionSheetAction(
+                                              child: const Text(
+                                                  'Choose photo from Library'),
+                                              onPressed: () async {
+                                                await getImageFromGal();
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            CupertinoActionSheetAction(
+                                              child:
+                                                  const Text('Capture Image'),
+                                              onPressed: () async {
+                                                await getImageFromCam();
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                          cancelButton:
+                                              CupertinoActionSheetAction(
+                                            child: const Text('Cancel'),
+                                            isDefaultAction: true,
+                                            onPressed: () {
+                                              Navigator.pop(context, 'Cancel');
+                                            },
+                                          )));
+                            },
+                            child: Container(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Text(
+                                  'Change Profile Picture',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      fontSize: 12,
+                                      color: hijackTextColor,
+                                      fontFamily: 'OpenSans',
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
                         )
                       ],
                     ),
@@ -214,7 +297,6 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                             isPhone = true;
                           }
                         });
-                        return value = "o";
                       },
                       style: TextStyle(
                           color: mainTextColor,

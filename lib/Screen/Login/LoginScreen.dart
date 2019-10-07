@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           fit: BoxFit.fitWidth)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only( left: 25, top: 80),
+                  padding: const EdgeInsets.only(left: 25, top: 80),
                   child: Container(
                     height: 45,
                     width: 311,
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left:25,top: 122),
+                  padding: const EdgeInsets.only(left: 25, top: 122),
                   child: Container(
                     width: 270,
                     child: Text(
@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(left:25,right: 25),
+                  padding: const EdgeInsets.only(left: 25, right: 25),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 27.0),
                     child: Column(
@@ -82,17 +82,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: 14, fontWeight: FontWeight.w500),
                           ),
                         ),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 6.0,
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 6.0,
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50,
                             child: TextField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(0)),
                                 ),
                               ),
                             ),
@@ -109,21 +110,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        Container(
-                          height: 40,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 6.0,
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 6.0,
+                          ),
+                          child: Container(
+                            height: 50,
                             child: TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                fillColor: Color.fromARGB(255, 246, 246, 246),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(0)),
-                                ),
-                              )
-                            ),
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  fillColor: Color.fromARGB(255, 246, 246, 246),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(0)),
+                                  ),
+                                )),
                           ),
                         ),
                         Container(
@@ -163,8 +164,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),
-                              onPressed: () { 
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (contex)=>MainScreen()));
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (contex) => MainScreen()));
                               },
                             ),
                           ),

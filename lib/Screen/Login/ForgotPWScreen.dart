@@ -93,16 +93,17 @@ class _ForgotPWScreenState extends State<ForgotPWScreen> {
                                 fontSize: 14, fontWeight: FontWeight.w500),
                           ),
                         ),
-                        Container(
-                          height: 40,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 6.0,
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 6.0,
+                          ),
+                          child: Container(
+                            height: 50,
                             child: TextField(
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(0)),
                                 ),
                               ),
                             ),

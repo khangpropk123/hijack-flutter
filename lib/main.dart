@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hijack_flutter/Screen/Home/Utilities.dart';
 import 'package:hijack_flutter/Screen/Login/ForgotPWScreen.dart';
 import 'package:hijack_flutter/Screen/Home/HomeScreen.dart';
 import 'package:hijack_flutter/Screen/Home/MainScreen.dart';
@@ -14,9 +15,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Hijack',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: MyHomePage(title: 'Hijack Food Delivery'),
     );
   }
@@ -32,7 +30,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return LoginScreen();

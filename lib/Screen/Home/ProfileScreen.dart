@@ -1,8 +1,11 @@
 import 'dart:ffi';
+import 'dart:io';
+import 'dart:ui' as prefix0;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hijack_flutter/Screen/Home/AccountInfoScreen.dart';
+import 'package:hijack_flutter/Screen/ProfilesScreen/%08FAQScreen.dart';
+import 'package:hijack_flutter/Screen/ProfilesScreen/AccountInfoScreen.dart';
 import 'package:hijack_flutter/Screen/Home/ChangePassScreen.dart';
 import 'package:hijack_flutter/Screen/Home/Utilities.dart';
 import 'package:hijack_flutter/Screen/Home/NotificationScreen.dart';
@@ -18,6 +21,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Color hijackColor = Color.fromRGBO(208, 3, 27, 1);
   Color mainTextColor = Color.fromRGBO(74, 74, 74, 1);
   double eleHeight = 40.0;
+  File avatar;
+  String path;
+  getPath() async {
+    path = await getStringFromPF('avatarPath');
+    print(path);
+    if (File(path).existsSync()) {
+      setState(() {
+        avatar = File(path);
+      });
+    } else {
+      setState(() {
+        avatar = null;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPath();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,7 +59,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: <Widget>[
                 CircleAvatar(
                   radius: 40,
-                  backgroundImage: AssetImage('assets/img/oval@3x.png'),
+                  backgroundImage: avatar == null
+                      ? AssetImage('assets/img/oval@3x.png')
+                      : FileImage(avatar),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
@@ -338,48 +365,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               //FAQ
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border:
-                      Border(bottom: BorderSide(width: 1, color: grayColor)),
-                ),
-                alignment: Alignment.centerLeft,
-                height: eleHeight,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 37),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          ImageIcon(
-                            AssetImage('assets/img/notificationCopy4@3x.png'),
-                            color: mainTextColor,
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  Navigator.of(context).push(
+                      CupertinoPageRoute(builder: (context) => FAQScreen()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border:
+                        Border(bottom: BorderSide(width: 1, color: grayColor)),
+                  ),
+                  alignment: Alignment.centerLeft,
+                  height: eleHeight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 37),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            ImageIcon(
+                              AssetImage('assets/img/notificationCopy4@3x.png'),
+                              color: mainTextColor,
+                              size: 14,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 24.0),
+                              child: Text(
+                                "FAQ",
+                                style: TextStyle(
+                                    color: mainTextColor,
+                                    fontSize: 14,
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30),
+                          child: Icon(
+                            Icons.arrow_forward_ios,
                             size: 14,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 24.0),
-                            child: Text(
-                              "FAQ",
-                              style: TextStyle(
-                                  color: mainTextColor,
-                                  fontSize: 14,
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 30),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 14,
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

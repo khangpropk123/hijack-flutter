@@ -10,6 +10,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Color grayColor = Color.fromRGBO(243, 243, 243, 1);
 Color grayText = Color.fromRGBO(160, 160, 160, 1);
@@ -30,6 +31,17 @@ class Orders {
 bool Validate(String str, String val) {
   if (str == val) return true;
   return false;
+}
+
+saveStringToSF(String keyValue, String path) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString(keyValue, path);
+}
+
+Future<String> getStringFromPF(String keyValue) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String path = prefs.getString(keyValue);
+  return path;
 }
 
 class NumberTextInputFormatter extends TextInputFormatter {
@@ -61,6 +73,55 @@ class NumberTextInputFormatter extends TextInputFormatter {
     return new TextEditingValue(
       text: newText.toString(),
       selection: new TextSelection.collapsed(offset: selectionIndex),
+    );
+  }
+}
+
+// ExpansionItem
+class FAQItem extends StatelessWidget {
+  final String title;
+  final String content;
+  FAQItem({this.title, this.content});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ExpansionTile(
+        initiallyExpanded: false,
+        leading: ImageIcon(
+          AssetImage('assets/img/info@3x.png'),
+          size: 18,
+          color: mainTextColor,
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Flexible(
+              child: Text(
+                title,
+                style: TextStyle(
+                    color: mainTextColor,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'OpenSans',
+                    fontSize: 14),
+              ),
+            )
+          ],
+        ),
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+            child: Text(
+              content,
+              style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  color: mainTextColor),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
