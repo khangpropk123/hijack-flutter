@@ -66,6 +66,27 @@ class _FAQScreenState extends State<FAQScreen> {
                   title: "How do I check my order status?",
                   content: "",
                 ),
+                Padding(
+                  padding: EdgeInsets.only(top: 20, left: 20),
+                  child: Text(
+                    'Food partners FAQ',
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: mainTextColor,
+                        fontFamily: 'OpenSans',
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Center(
+                    child: FAQItem(
+                      title: "Can I become a Hijack food merchant?",
+                      content:
+                          "This is considered an error condition because it indicates that there is content that cannot be seen. If the content is legitimately bigger than the available space, consider clipping it with a ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex, like a ListView.",
+                    ),
+                  ),
+                )
               ],
             ),
           ],

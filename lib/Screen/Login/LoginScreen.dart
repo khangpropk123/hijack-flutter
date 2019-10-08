@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:hijack_flutter/Screen/FoodStatus/FoodReadyScreen.dart';
 import 'package:hijack_flutter/Screen/Login/ForgotPWScreen.dart';
 import 'package:hijack_flutter/Screen/Home/MainScreen.dart';
 import 'package:hijack_flutter/Screen/Login/TermsScreen.dart';
@@ -165,10 +166,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               onPressed: () {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (contex) => MainScreen()));
+                                        builder: (context) => MapSample()));
+                                // Navigator.pushReplacement(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (contex) => MainScreen()));
                               },
                             ),
                           ),

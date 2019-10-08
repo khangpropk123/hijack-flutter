@@ -85,6 +85,7 @@ class FAQItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       child: ExpansionTile(
         initiallyExpanded: false,
         leading: ImageIcon(
@@ -125,3 +126,16 @@ class FAQItem extends StatelessWidget {
     );
   }
 }
+
+TextStyle foodReadyTimeStyle = TextStyle(
+    color: mainTextColor, fontFamily: 'OpenSans', fontWeight: FontWeight.bold);
+TextStyle foodReadyTitleStyle = TextStyle(
+    color: mainTextColor,
+    fontFamily: 'OpenSans',
+    fontSize: 14,
+    fontWeight: FontWeight.bold);
+TextStyle foodPickedUpTitleStyle = TextStyle(
+    color: Colors.white,
+    fontFamily: 'OpenSans',
+    fontSize: 14,
+    fontWeight: FontWeight.bold);

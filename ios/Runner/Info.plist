@@ -22,6 +22,8 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs your location to test the location feature of the Google Maps plugin.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to demonstrate image picker plugin</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -51,5 +53,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 </dict>
 </plist>
