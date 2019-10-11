@@ -2,9 +2,11 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:hijack_flutter/Screen/FoodStatus/FoodReadyScreen.dart';
+import 'package:hijack_flutter/Screen/Home/HomeScreen.dart';
 import 'package:hijack_flutter/Screen/Login/ForgotPWScreen.dart';
 import 'package:hijack_flutter/Screen/Home/MainScreen.dart';
 import 'package:hijack_flutter/Screen/Login/TermsScreen.dart';
+import 'package:hijack_flutter/Screen/Home/DeliveryDetailScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -166,10 +168,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               onPressed: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => MapSample()));
+                                        builder: (context) => MainScreen()));
                                 // Navigator.pushReplacement(
                                 //     context,
                                 //     MaterialPageRoute(
@@ -193,7 +195,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (contex) => TermsScreen()));
+                                    builder: (contex) =>
+                                        DeliveryDetailScreen()));
                           },
                           child: Container(
                             child: Padding(

@@ -35,6 +35,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
         appBar: narbarSelected == 1
             ? AppBar(
                 backgroundColor: Color.fromRGBO(168, 0, 20, 1),
@@ -49,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
                           onTap: () {
                             setState(() {
                               appbarSelected = 0;
-                              widSelected = 1;
+                              mainScreenControler.sink.add(1);
                             });
                           },
                           child: Container(
@@ -117,7 +118,7 @@ class _MainScreenState extends State<MainScreen> {
                           onTap: () {
                             setState(() {
                               appbarSelected = 1;
-                              widSelected = 4;
+                              mainScreenControler.sink.add(4);
                             });
                           },
                           child: Container(

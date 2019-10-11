@@ -25,6 +25,8 @@ class _ChangePassScreenState extends State<ChangePassScreen> {
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
+      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: hijackColor,
         centerTitle: false,

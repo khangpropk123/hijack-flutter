@@ -7,6 +7,7 @@
 //   none
 // }
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -139,3 +140,9 @@ TextStyle foodPickedUpTitleStyle = TextStyle(
     fontFamily: 'OpenSans',
     fontSize: 14,
     fontWeight: FontWeight.bold);
+
+Color RandColors() {
+  Random rand = Random();
+  return Color.fromRGBO(
+      rand.nextInt(255), rand.nextInt(255), rand.nextInt(255), 1);
+}

@@ -26,7 +26,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   getPath() async {
     path = await getStringFromPF('avatarPath');
     print(path);
-    if (File(path).existsSync()) {
+
+    if (path != null && File(path).existsSync()) {
       setState(() {
         avatar = File(path);
       });
@@ -508,51 +509,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               //Logout
-              Container(
-                height: MediaQuery.of(context).size.height -
-                    (171 + 83) -
-                    eleHeight * 11,
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, "/login", (r) => false);
+                },
                 child: Container(
-                  height: eleHeight,
-                  child: Center(
-                    child: Container(
-                      height: eleHeight,
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 37),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                ImageIcon(
-                                  AssetImage('assets/img/iconLogout@3x.png'),
+                  height: MediaQuery.of(context).size.height -
+                      (171 + 83) -
+                      eleHeight * 11,
+                  child: Container(
+                    height: eleHeight,
+                    child: Center(
+                      child: Container(
+                        height: eleHeight,
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 37),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  ImageIcon(
+                                    AssetImage('assets/img/iconLogout@3x.png'),
+                                    color: hijackColor,
+                                    size: 14,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 24.0),
+                                    child: Text(
+                                      "Logout",
+                                      style: TextStyle(
+                                          color: hijackColor,
+                                          fontSize: 14,
+                                          fontFamily: 'OpenSans',
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 30),
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
                                   color: hijackColor,
                                   size: 14,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 24.0),
-                                  child: Text(
-                                    "Logout",
-                                    style: TextStyle(
-                                        color: hijackColor,
-                                        fontSize: 14,
-                                        fontFamily: 'OpenSans',
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 30),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color: hijackColor,
-                                size: 14,
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

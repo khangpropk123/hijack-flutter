@@ -3,13 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hijack_flutter/Screen/Home/Utilities.dart';
+import 'package:hijack_flutter/Screen/Request/DirectionRequest.dart';
 
-class MapSample extends StatefulWidget {
+class FoodReadyScreen extends StatefulWidget {
   @override
-  State<MapSample> createState() => MapSampleState();
+  State<FoodReadyScreen> createState() => FoodReadyScreenState();
 }
 
-class MapSampleState extends State<MapSample> {
+class FoodReadyScreenState extends State<FoodReadyScreen> {
   GoogleMapController _controller;
   LatLng psde = LatLng(10.802615, 106.654846);
   static final CameraPosition _kGooglePlex = CameraPosition(
@@ -44,6 +45,24 @@ class MapSampleState extends State<MapSample> {
     ].toSet();
   }
 
+  Set<Polyline> _polylines = {};
+  List<LatLng> latlng = [
+    LatLng(10.802615, 106.654846),
+    LatLng(10.788051, 106.713195),
+  ];
+  void onGo() {
+    setState(() {
+      _polylines.add(Polyline(
+        polylineId: PolylineId("Home"),
+        visible: true,
+        points: latlng,
+        color: Colors.red,
+      ));
+    });
+  }
+
+  GoogleMapsServices ggService = new GoogleMapsServices();
+
   @override
   Widget build(BuildContext context) {
     _createMarkerImageFromAsset(context);
@@ -59,10 +78,13 @@ class MapSampleState extends State<MapSample> {
                   width: MediaQuery.of(context).size.width,
                   child: GoogleMap(
                     mapType: MapType.normal,
+                    myLocationButtonEnabled: false,
+                    myLocationEnabled: true,
                     initialCameraPosition: _kGooglePlex,
                     onMapCreated: (GoogleMapController controller) {
                       _controller = controller;
                     },
+                    polylines: _polylines,
                     markers: createMarker(psde),
                     onTap: (position) {
                       setState(() {
@@ -112,9 +134,16 @@ class MapSampleState extends State<MapSample> {
                               Container(
                                 height: 15,
                                 width: 15,
-                                child: Image(
-                                  image:
-                                      AssetImage('assets/img/ovalCopy3@3x.png'),
+                                child: Center(
+                                  child: Container(
+                                    height: 5,
+                                    child: Image(
+                                      color: hijackTextColor,
+                                      fit: BoxFit.fill,
+                                      image: AssetImage(
+                                          'assets/img/ovalCopy3@3x.png'),
+                                    ),
+                                  ),
                                 ),
                               ),
                               Container(
@@ -159,10 +188,12 @@ class MapSampleState extends State<MapSample> {
                               Container(
                                 height: 50,
                                 width: 2,
-                                child: Image(
-                                  image: AssetImage('assets/img/line2@3x.png'),
-                                  fit: BoxFit.fill,
-                                ),
+                                color: Colors.orange,
+                                // child: Image(
+                                //   color: Colors.orange,
+                                //   image: AssetImage('assets/img/line2@3x.png'),
+                                //   fit: BoxFit.fill,
+                                // ),
                               )
                             ],
                           ),
@@ -368,7 +399,8 @@ class MapSampleState extends State<MapSample> {
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                print(MediaQuery.of(context).size.height);
+                onGo();
+                print(ggService.getRouteCoordinates(latlng[0], latlng[1]));
               },
               child: Container(
                 padding: EdgeInsets.only(top: 15),

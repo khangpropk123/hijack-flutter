@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Hijack',
       home: MyHomePage(title: 'Hijack Food Delivery'),
+      routes: {'/login': (context) => LoginScreen()},
     );
   }
 }
