@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:hijack_flutter/Screen/Home/Utilities.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Draw extends StatefulWidget {
   @override
@@ -30,6 +32,21 @@ class _DrawState extends State<Draw> {
     Colors.amber,
     Colors.black
   ];
+  Future<File> saveImage(var input, String name) async {
+    final directory = await getApplicationDocumentsDirectory();
+    print(directory.path);
+
+    new Directory(directory.path + '/ImageSignt')
+        .create()
+        .then((Directory directory) {
+      print(directory.path);
+    });
+    String finalPath = directory.path + '/ImageSignt/$name.PNG';
+    var file = File(finalPath);
+
+    return file.writeAsBytes(input);
+  }
+
   Future<Uint8List> _capturePng() async {
     try {
       print('inside');
@@ -46,6 +63,7 @@ class _DrawState extends State<Draw> {
       return pngBytes;
     } catch (e) {
       print(e);
+      return null;
     }
   }
 
@@ -57,8 +75,7 @@ class _DrawState extends State<Draw> {
         child: Container(
             padding: const EdgeInsets.only(left: 8.0, right: 8.0),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50.0),
-                color: Colors.greenAccent),
+                borderRadius: BorderRadius.circular(50.0), color: hijackColor),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -68,7 +85,10 @@ class _DrawState extends State<Draw> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       IconButton(
-                          icon: Icon(Icons.album),
+                          icon: Icon(
+                            Icons.album,
+                            color: Colors.white,
+                          ),
                           onPressed: () {
                             setState(() {
                               if (selectedMode == SelectedMode.StrokeWidth)
@@ -77,7 +97,10 @@ class _DrawState extends State<Draw> {
                             });
                           }),
                       IconButton(
-                          icon: Icon(Icons.opacity),
+                          icon: Icon(
+                            Icons.opacity,
+                            color: Colors.white,
+                          ),
                           onPressed: () {
                             setState(() {
                               if (selectedMode == SelectedMode.Opacity)
@@ -86,9 +109,14 @@ class _DrawState extends State<Draw> {
                             });
                           }),
                       IconButton(
-                          icon: Icon(Icons.save_alt),
+                          icon: Icon(
+                            Icons.save_alt,
+                            color: Colors.white,
+                          ),
                           onPressed: () async {
                             var a = await _capturePng();
+                            var b = await saveImage(a, "FirstSignt");
+                            print(b.path);
                             showCupertinoDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -105,7 +133,7 @@ class _DrawState extends State<Draw> {
                                 });
                           }),
                       IconButton(
-                          icon: Icon(Icons.color_lens),
+                          icon: Icon(Icons.color_lens, color: Colors.white),
                           onPressed: () {
                             setState(() {
                               if (selectedMode == SelectedMode.Color)
@@ -114,7 +142,10 @@ class _DrawState extends State<Draw> {
                             });
                           }),
                       IconButton(
-                          icon: Icon(Icons.clear),
+                          icon: Icon(
+                            Icons.clear,
+                            color: Colors.white,
+                          ),
                           onPressed: () {
                             setState(() {
                               showBottomList = false;

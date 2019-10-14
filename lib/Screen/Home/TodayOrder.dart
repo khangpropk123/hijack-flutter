@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hijack_flutter/Screen/Home/DeliveryDetailScreen.dart';
 import 'Utilities.dart';
 
 class TodayOrderScreen extends StatefulWidget {
@@ -9,7 +11,6 @@ class TodayOrderScreen extends StatefulWidget {
 }
 
 class _TodayOrderScreenState extends State<TodayOrderScreen> {
-  
   Color textColor = Color.fromRGBO(74, 74, 74, 1);
   Color iconColor = Color.fromRGBO(160, 160, 160, 1);
   List<Orders> orders;
@@ -22,7 +23,13 @@ class _TodayOrderScreenState extends State<TodayOrderScreen> {
   @override
   void initState() {
     super.initState();
-    orders=[Orders(deliveringColor, "• Delivering"),Orders(deliveredColor, "• Delivered"),Orders(confirmedColor, "• Confirmed"),Orders(readyColor, "• Food Ready"),Orders(cancelledColor, "• Cancelled"),];
+    orders = [
+      Orders(deliveringColor, "• Delivering"),
+      Orders(deliveredColor, "• Delivered"),
+      Orders(confirmedColor, "• Confirmed"),
+      Orders(readyColor, "• Food Ready"),
+      Orders(cancelledColor, "• Cancelled"),
+    ];
   }
 
   @override
@@ -74,7 +81,7 @@ class _TodayOrderScreenState extends State<TodayOrderScreen> {
                                 Text(
                                   orders[index].statusText,
                                   style: TextStyle(
-                                      color: orders[index].statusColor ,
+                                      color: orders[index].statusColor,
                                       fontSize: 10,
                                       fontFamily: 'OpenSans',
                                       fontWeight: FontWeight.bold),
@@ -222,8 +229,8 @@ class _TodayOrderScreenState extends State<TodayOrderScreen> {
                   child: Center(
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border(bottom: BorderSide(width: 1, color: iconColor))
-                      ),
+                          border: Border(
+                              bottom: BorderSide(width: 1, color: iconColor))),
                       width: MediaQuery.of(context).size.width,
                       child: Column(
                         children: <Widget>[
@@ -231,7 +238,11 @@ class _TodayOrderScreenState extends State<TodayOrderScreen> {
                             height: 34,
                             width: 335,
                             child: RaisedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(CupertinoPageRoute(
+                                    builder: (context) =>
+                                        DeliveryDetailScreen()));
+                              },
                               child: Row(
                                 children: <Widget>[
                                   Expanded(
@@ -256,7 +267,8 @@ class _TodayOrderScreenState extends State<TodayOrderScreen> {
                                             fontSize: 12,
                                             fontFamily: 'OpenSans',
                                             fontWeight: FontWeight.bold,
-                                            color: Color.fromRGBO(208, 3, 27, 1)),
+                                            color:
+                                                Color.fromRGBO(208, 3, 27, 1)),
                                       ),
                                     ),
                                   ),
@@ -264,7 +276,6 @@ class _TodayOrderScreenState extends State<TodayOrderScreen> {
                               ),
                             ),
                           ),
-
                         ],
                       ),
                     ),

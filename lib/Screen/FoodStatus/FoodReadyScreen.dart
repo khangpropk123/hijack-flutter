@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hijack_flutter/Screen/Draw/Draw.dart';
 import 'package:hijack_flutter/Screen/Home/Utilities.dart';
 import 'package:hijack_flutter/Screen/Request/DirectionRequest.dart';
 
@@ -399,8 +401,8 @@ class FoodReadyScreenState extends State<FoodReadyScreen> {
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                onGo();
-                print(ggService.getRouteCoordinates(latlng[0], latlng[1]));
+                Navigator.of(context)
+                    .push(CupertinoPageRoute(builder: (context) => Draw()));
               },
               child: Container(
                 padding: EdgeInsets.only(top: 15),

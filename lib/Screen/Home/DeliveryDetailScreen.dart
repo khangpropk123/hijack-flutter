@@ -6,6 +6,7 @@ import 'package:hijack_flutter/Screen/Draw/Draw.dart';
 import 'package:hijack_flutter/Screen/Home/Utilities.dart';
 import 'package:hijack_flutter/Screen/Request/DirectionRequest.dart';
 import 'package:hijack_flutter/Classes/OrderDetailClass.dart';
+import 'package:hijack_flutter/Screen/FoodStatus/FoodReadyScreen.dart';
 
 class DeliveryDetailScreen extends StatefulWidget {
   @override
@@ -246,7 +247,7 @@ class DeliveryDetailState extends State<DeliveryDetailScreen> {
                           behavior: HitTestBehavior.translucent,
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Draw()));
+                                builder: (context) => FoodReadyScreen()));
                           },
                           child: Container(
                             height: 90,

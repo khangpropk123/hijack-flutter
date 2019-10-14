@@ -195,8 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (contex) =>
-                                        DeliveryDetailScreen()));
+                                    builder: (contex) => TermsScreen()));
                           },
                           child: Container(
                             child: Padding(

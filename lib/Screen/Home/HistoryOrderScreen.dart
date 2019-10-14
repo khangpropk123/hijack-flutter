@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hijack_flutter/Screen/Home/DeliveryDetailScreen.dart';
 
 class HistoryOrderScreen extends StatefulWidget {
   @override
@@ -210,7 +212,10 @@ class _HistoryOrderScreen extends State<HistoryOrderScreen> {
                         height: 34,
                         width: 335,
                         child: RaisedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(CupertinoPageRoute(
+                                builder: (context) => DeliveryDetailScreen()));
+                          },
                           child: Row(
                             children: <Widget>[
                               Expanded(
