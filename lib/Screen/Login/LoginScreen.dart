@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -10,7 +11,7 @@ import 'package:hijack_flutter/Screen/Login/ForgotPWScreen.dart';
 import 'package:hijack_flutter/Screen/Home/MainScreen.dart';
 import 'package:hijack_flutter/Screen/Login/TermsScreen.dart';
 import 'package:location/location.dart';
-
+import 'package:hijack_flutter/Screen/Home/Utilities.dart';
 //Import Flare
 import 'package:flare_flutter/flare_actor.dart';
 
@@ -24,28 +25,48 @@ class _LoginScreenState extends State<LoginScreen> {
   String password;
   bool isFalse = false;
   bool isAnimation = false;
+  bool isEmail = true;
+  TextEditingController emailCtr;
+  TextEditingController passwCtr;
   @override
   void initState() {
     super.initState();
+
     setState(() {
+      isAnimation = true;
       username = "";
       password = "";
     });
+    getAuth();
   }
 
-  handleLogin() async {
+  getAuth() async {
+    String auth = await getStringFromPF("Auth");
+    var Auth = {};
+    if (auth != null) {
+      Auth = jsonDecode(auth);
+      handleLogin(Auth['username'], Auth['password']);
+    } else {
+      setState(() {
+        isAnimation = false;
+      });
+    }
+  }
+
+  handleLogin(String email, String pass) async {
     Dio dio = new Dio();
 
     Location location = new Location();
     var loc = await location.getLocation();
     LatLng position = LatLng(loc.latitude, loc.longitude);
     LoginRequest login = new LoginRequest(
-        username: username,
-        password: password,
-        email: username,
+        username: email,
+        password: pass,
+        email: email,
         devicetoken: "",
         platform: Platform.operatingSystem.toString(),
         position: position);
+    //print(Platform.operatingSystem.toString());
     var response = dio
         .post(login.APILogin,
             options: Options(
@@ -54,12 +75,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   return status < 500;
                 }),
             data: login.logindata())
-        .then((res) {
+        .then((res) async {
       if (res.data["errors"] != null) {
         setState(() {
           isFalse = true;
         });
       } else {
+        var auth = {};
+        auth["username"] = email;
+        auth["password"] = pass;
+        var user = jsonEncode(auth);
+        await saveStringToSF('Auth', user);
         Navigator.of(context).pushReplacement(
             CupertinoPageRoute(builder: (context) => MainScreen()));
       }
@@ -151,14 +177,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 child: Container(
                                   alignment: Alignment.center,
-                                  height: 50,
-                                  child: TextField(
+                                  height: isEmail ? 50 : 70,
+                                  child: TextFormField(
+                                    autocorrect: false,
+                                    initialValue: username,
+                                    controller: emailCtr,
                                     onChanged: (value) {
                                       setState(() {
                                         username = value;
+                                        if (!username.contains("@")) {
+                                          isEmail = false;
+                                        } else {
+                                          isEmail = true;
+                                        }
                                       });
                                     },
                                     decoration: InputDecoration(
+                                      errorText: isEmail
+                                          ? null
+                                          : 'Email is not valid. Please check again',
+                                      errorStyle: TextStyle(
+                                          color: Color.fromRGBO(208, 2, 27, 1),
+                                          fontSize: 12,
+                                          fontFamily: 'OpenSans',
+                                          fontWeight: FontWeight.bold),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(0)),
@@ -185,7 +227,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 child: Container(
                                   height: !isFalse ? 50 : 70,
-                                  child: TextField(
+                                  child: TextFormField(
+                                      initialValue: password,
+                                      controller: passwCtr,
                                       onChanged: (value) {
                                         setState(() {
                                           password = value;
@@ -196,7 +240,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       decoration: InputDecoration(
                                         errorText: !isFalse
                                             ? null
-                                            : '⚠️ Current password is not right. Please check again',
+                                            : 'Current password or email is not right. Please check again',
                                         errorStyle: TextStyle(
                                             color:
                                                 Color.fromRGBO(208, 2, 27, 1),
@@ -242,7 +286,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: 50,
                                   width: 325,
                                   child: RaisedButton(
-                                    color: (username == "" || password == "")
+                                    color: (username == "" ||
+                                            password == "" ||
+                                            !isEmail)
                                         ? Color.fromRGBO(234, 234, 234, 1)
                                         : hijackTextColor,
                                     child: Center(
@@ -251,20 +297,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ),
-                                    onPressed: () {
-                                      setState(() {
-                                        isAnimation = true;
-                                      });
-                                      handleLogin();
-                                      // Navigator.pushReplacement(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) => MainScreen()));
-                                      // Navigator.pushReplacement(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (contex) => MainScreen()));
-                                    },
+                                    onPressed: (username == "" ||
+                                            password == "" ||
+                                            !isEmail)
+                                        ? null
+                                        : () {
+                                            setState(() {
+                                              isAnimation = true;
+                                            });
+                                            handleLogin(username, password);
+                                            // Navigator.pushReplacement(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) => MainScreen()));
+                                            // Navigator.pushReplacement(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (contex) => MainScreen()));
+                                          },
                                   ),
                                 ),
                               ),

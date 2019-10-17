@@ -45,6 +45,11 @@ Future<String> getStringFromPF(String keyValue) async {
   return path;
 }
 
+Future<bool> removeSF(String keyValue) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.remove(keyValue);
+}
+
 class NumberTextInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

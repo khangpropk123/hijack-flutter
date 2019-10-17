@@ -511,7 +511,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //Logout
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: () {
+                onTap: () async {
+                  var isRemove = await removeSF("Auth");
                   Navigator.pushNamedAndRemoveUntil(
                       context, "/login", (r) => false);
                 },
