@@ -71,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
         .post(login.APILogin,
             options: Options(
                 followRedirects: false,
+                receiveDataWhenStatusError: true,
                 validateStatus: (status) {
                   return status < 500;
                 }),
